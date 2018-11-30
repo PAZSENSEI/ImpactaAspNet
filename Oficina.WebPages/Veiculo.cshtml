@@ -1,0 +1,165 @@
+﻿@using Oficina.WebPages
+
+@{
+    var veiculoAplicacao = new VeiculoAplicacao();
+}
+
+@* a expressão @{  *@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    @*  COMENTÁRIO O QUE VAI NO HEAD NÃO É EXIBIDO *@
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> font-family: 'Playfair Display', serif;
+
+
+    
+
+    <meta name="viewport" content="width=device-width" /> @* meta = tenta ajustar o layout*@
+    <title>Cadastro de Veiculo</title>
+    <style>
+
+        label {
+            min-width: 100px;
+            display: inline-block;
+            font-family: 'Playfair Display', serif;
+        }
+
+        input, select, button {
+            min-width: 200px;
+            min-height: 24px;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+            input[type=submit] {
+                width: 300px;
+                font-family: 'Playfair Display', serif;
+            }
+    </style>
+</head>
+<body>
+
+    @*TRATAMENTO DE ERROS*@
+
+    @if (IsPost)
+    {
+        veiculoAplicacao.Inserir();
+        Response.Redirect("Veiculo");
+    }
+
+
+    @* body vai comportar os objetos e componentes da página *@
+
+    <h1>Cadastro de Veiculo</h1> @* h1 = cabeçalho interno da pagina*@
+    <hr />
+    <form action="" method="post">
+        @*form = elemento e   é um atributo aqui o form define para onde o dado vai ser enviado *@
+
+        <label for="marca">Marca</label>
+        <select name="marca" onchange="obterModelos(this.value)">
+            @* select = combobox*@
+            <option value="">Selecione</option> @*option = lista de opções para o select*@
+            @foreach (var marca in veiculoAplicacao.Marcas)
+            {
+                <option value="@marca.Id" selected="@Convert.ToBoolean(marca.Id.ToString() == veiculoAplicacao.MarcaSelecionada)">
+                    @marca.Nome
+                </option> @*option = lista de opções para o select*@
+
+            }
+            @*apenas os elementos que contém o atributo "Name" são enviados para o servidor *@
+        </select>
+        <br />
+
+
+        <label for="modelo">Modelo</label>
+        <select name="modelo">
+            @* select = combobox*@
+            <option value="">Selecione</option> @*option = lista de opções para o select*@
+            @foreach (var modelo in veiculoAplicacao.Modelos)
+            {
+                <option value="@modelo.Id">@modelo.Nome</option> @*option = lista de opções para o select*@
+
+            }
+            @*apenas os elementos que contém o atributo "Name" são enviados para o servidor *@
+        </select>
+        <br />
+
+
+
+
+        <label for="placa">Placa</label>
+        <input type="text" name="placa" value="" />
+        <br />
+
+
+        <label for="ano">Ano</label>
+        <input type="text" name="ano" value="" />
+        <br />
+
+        <label for="cor">Cor</label>
+        <select name="cor">
+            @* select = combobox*@
+            <option value="">Selecione</option> @*option = lista de opções para o select*@
+            @foreach (var cor in veiculoAplicacao.Cores)
+            {
+                <option value="@cor.Id">@cor.Nome</option> @*option = lista de opções para o select*@
+
+            }
+            @*apenas os elementos que contém o atributo "Name" são enviados para o servidor *@
+
+        </select>
+
+        <br />
+
+
+        <label for="combustivel">Combustível</label>
+        <select name="combustivel">
+            <option value="">Selecione</option>
+            @foreach (var combustivel in veiculoAplicacao.Combustiveis)
+            {
+                <option value="@((int)combustivel)">@combustivel</option>
+            }
+        </select>
+        <br />
+
+
+        <label for="cambio">Câmbio</label>
+        <select name="cambio">
+            @* select = combobox*@
+            <option value="">Selecione</option> @*option = lista de opções para o select*@
+            @foreach (var cambio in veiculoAplicacao.Cambios)
+            {
+                <option value="@((int)cambio)">@cambio</option> @*option = lista de opções para o select*@
+            }
+            @*apenas os elementos que contém o atributo "Name" são enviados para o servidor *@
+
+        </select>
+
+        <br />
+
+
+        <label for="observacao">Observação</label>
+        <br />
+        <textarea name="observacao" rows="10" cols="40"></textarea>
+        <br />
+
+
+
+        <input type="submit" value="Gravar" />
+    </form>
+
+    @*parte do javascript, é bom colocar no final*@
+    <script type="text/javascript">
+        function obterModelos(marcaId) {
+            const nomePagina = document.location.pathname;
+            document.location.href = nomePagina + "?marcaId=" + marcaId
+        }
+
+
+    </script>
+
+
+</body>
+</html>
