@@ -24,7 +24,7 @@ namespace Oficina.Repositorios.SistemaArquivos
                 AppSettings["caminhoArquivoVeiculo"]);
         }
 
-        public void Inserir(Veiculo veiculo)
+        public void Inserir<T>(T veiculo) where T: Veiculo
         {
             arquivoXml = XDocument.Load(caminhoArquivo);
 

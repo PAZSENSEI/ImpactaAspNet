@@ -53,7 +53,7 @@ namespace Oficina.WebPages
 
         public void Inserir()
         {
-            var veiculo = new Veiculo();
+            var veiculo = new VeiculoPasseio();
             var formulario = HttpContext.Current.Request.Form;
 
             veiculo.Ano = Convert.ToInt32(formulario["ano"]);
@@ -61,7 +61,7 @@ namespace Oficina.WebPages
             veiculo.Combustivel = (Combustivel)Convert.ToInt32(formulario["combustivel"]);
             veiculo.Cor = corRepositorio.Selecionar(Convert.ToInt32(formulario["cor"]));
             veiculo.Modelo = modeloRepositorio.Selecionar(Convert.ToInt32(formulario["modelo"]));
-
+            veiculo.Carroceria = Carroceria.Hatch;
             veiculo.Observacoes = formulario["observacao"];
             veiculo.Placa = formulario["placa"];
             veiculoRepositorio.Inserir(veiculo);

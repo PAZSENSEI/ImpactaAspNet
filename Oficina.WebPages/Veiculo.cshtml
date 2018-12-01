@@ -63,7 +63,8 @@
             <option value="">Selecione</option> @*option = lista de opções para o select*@
             @foreach (var marca in veiculoAplicacao.Marcas)
             {
-                <option value="@marca.Id" selected="@Convert.ToBoolean(marca.Id.ToString() == veiculoAplicacao.MarcaSelecionada)">
+                <option value="@marca.Id" 
+                        selected="@Convert.ToBoolean(marca.Id.ToString() == veiculoAplicacao.MarcaSelecionada)">
                     @marca.Nome
                 </option> @*option = lista de opções para o select*@
 
