@@ -47,6 +47,7 @@
     <Compile Include="Marca.cs" />
     <Compile Include="Modelo.cs" />
     <Compile Include="Motocicleta.cs" />
+    <Compile Include="QuantidadeEixo.cs" />
     <Compile Include="Veiculo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

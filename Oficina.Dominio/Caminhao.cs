@@ -8,6 +8,6 @@ namespace Oficina.Dominio
 {
    public class Caminhao: Veiculo
     {
-       
+       public QuantidadeEixo QuantidadeEixo { get; set; }
     }
 }
