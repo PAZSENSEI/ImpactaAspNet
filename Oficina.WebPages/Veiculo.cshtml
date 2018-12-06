@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> font-family: 'Playfair Display', serif;
 
 
-    
+
 
     <meta name="viewport" content="width=device-width" /> @* meta = tenta ajustar o layout*@
     <title>Cadastro de Veiculo</title>
@@ -37,16 +37,40 @@
                 width: 300px;
                 font-family: 'Playfair Display', serif;
             }
+
+            
+        #mensagemErro{
+                height: 40px;
+                background-color:#dc3545;
+                margin-bottom: 10px;
+                color:white;
+                text-align:center;
+                vertical-align:middle;
+                line-height: 40px
+                    
+
+            }
+
+
     </style>
 </head>
 <body>
 
     @*TRATAMENTO DE ERROS*@
 
+
     @if (IsPost)
     {
-        veiculoAplicacao.Inserir();
-        Response.Redirect("Veiculo");
+        try
+        {
+            veiculoAplicacao.Inserir();
+            Response.Redirect("Veiculo");
+        }
+
+        catch
+        {
+            <div id="mensagemErro">@HttpContext.Current.Items["MensagemErro"]</div>
+        }
     }
 
 
@@ -63,7 +87,7 @@
             <option value="">Selecione</option> @*option = lista de opções para o select*@
             @foreach (var marca in veiculoAplicacao.Marcas)
             {
-                <option value="@marca.Id" 
+                <option value="@marca.Id"
                         selected="@Convert.ToBoolean(marca.Id.ToString() == veiculoAplicacao.MarcaSelecionada)">
                     @marca.Nome
                 </option> @*option = lista de opções para o select*@
@@ -91,12 +115,12 @@
 
 
         <label for="placa">Placa</label>
-        <input type="text" name="placa" value="" />
+        <input type="text" name="placa" value="@Request.Form["placa"]" />
         <br />
 
 
         <label for="ano">Ano</label>
-        <input type="text" name="ano" value="" />
+        <input type="text" name="ano" value="@Request.Form["ano"]" />
         <br />
 
         <label for="cor">Cor</label>
@@ -105,7 +129,7 @@
             <option value="">Selecione</option> @*option = lista de opções para o select*@
             @foreach (var cor in veiculoAplicacao.Cores)
             {
-                <option value="@cor.Id">@cor.Nome</option> @*option = lista de opções para o select*@
+                <option value="@cor.Id" selected="@Convert.ToBoolean(cor.Id.ToString() == Request.Form["cor"])">@cor.Nome</option> @*option = lista de opções para o select*@
 
             }
             @*apenas os elementos que contém o atributo "Name" são enviados para o servidor *@
@@ -157,7 +181,6 @@
             const nomePagina = document.location.pathname;
             document.location.href = nomePagina + "?marcaId=" + marcaId
         }
-
 
     </script>
 

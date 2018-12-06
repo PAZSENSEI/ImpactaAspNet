@@ -3,6 +3,7 @@ using Oficina.Repositorios;
 using Oficina.Repositorios.SistemaArquivos;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -39,7 +40,7 @@ namespace Oficina.WebPages
             }
 
 
-                        Cores = corRepositorio.Selecionar();
+            Cores = corRepositorio.Selecionar();
             Combustiveis = Enum
                 .GetValues(typeof(Combustivel))
                 .Cast<Combustivel>()
@@ -53,21 +54,52 @@ namespace Oficina.WebPages
 
         public void Inserir()
         {
-            var veiculo = new VeiculoPasseio();
-            var formulario = HttpContext.Current.Request.Form;
+            try
+            {
+                var veiculo = new VeiculoPasseio();
+                var formulario = HttpContext.Current.Request.Form;
 
-            veiculo.Ano = Convert.ToInt32(formulario["ano"]);
-            veiculo.Cambio = (Cambio)Convert.ToInt32(formulario["cambio"]);
-            veiculo.Combustivel = (Combustivel)Convert.ToInt32(formulario["combustivel"]);
-            veiculo.Cor = corRepositorio.Selecionar(Convert.ToInt32(formulario["cor"]));
-            veiculo.Modelo = modeloRepositorio.Selecionar(Convert.ToInt32(formulario["modelo"]));
-            veiculo.Carroceria = Carroceria.Hatch;
-            veiculo.Observacoes = formulario["observacao"];
-            veiculo.Placa = formulario["placa"];
-            veiculoRepositorio.Inserir(veiculo);
+                veiculo.Ano = Convert.ToInt32(formulario["ano"]);
+                veiculo.Cambio = (Cambio)Convert.ToInt32(formulario["cambio"]);
+                veiculo.Combustivel = (Combustivel)Convert.ToInt32(formulario["combustivel"]);
+                veiculo.Cor = corRepositorio.Selecionar(Convert.ToInt32(formulario["cor"]));
+                veiculo.Modelo = modeloRepositorio.Selecionar(Convert.ToInt32(formulario["modelo"]));
+                veiculo.Carroceria = Carroceria.Hatch;
+                veiculo.Observacoes = formulario["observacao"];
+                veiculo.Placa = formulario["placa"];/*.ToUpper();*/
+                veiculoRepositorio.Inserir(veiculo);
 
+                new VeiculoRepositorio().Inserir(veiculo);
+            }
+            catch (FileNotFoundException ex) when (!ex.FileName.Contains("Senha"))
+            {
+                
+                HttpContext.Current.Items.Add("MensagemErro", $"Arquivo {ex.FileName} não encontrado.");
 
+                throw;
+            }
 
+            catch (DirectoryNotFoundException)
+            {
+                HttpContext.Current.Items.Add("MensagemErro", $"Diretório não encontrado.");
+                throw;
+            }
+
+            catch (UnauthorizedAccessException)
+            {
+                HttpContext.Current.Items.Add("MensagemErro", $"Acesso Negado.");
+                throw;
+            }
+
+            catch (Exception)
+            {
+                HttpContext.Current.Items.Add("MensagemErro", $"Atenção, ocorreu um erro, acione o suporte");
+                throw;
+            }
+            finally
+            {
+                //é sempre executado tanto no sucesso ou no erro
+            }
             //    veiculo.Placa = "FTW-1836";
             //    veiculo.Observacao = "Observação";
             //    veiculo.Combustivel = Combustivel.Alcool;
@@ -76,7 +108,7 @@ namespace Oficina.WebPages
             //    veiculo.Modelo = new ModeloRepositorio().Selecionar(1);
             //    veiculo.Cor = new CorRepositorio().Selecionar(1);
 
-            new VeiculoRepositorio().Inserir(veiculo);
+
         }
 
 

@@ -8,9 +8,10 @@ namespace Oficina.Dominio
 {
     public class VeiculoPasseio : Veiculo
     {
-
+        //ToDo: herança(:) com a classe Veiculo.
         public Carroceria Carroceria { get; set; }
 
+        //todo: OO Polimosfismo por sobrescrita
         public override List<string> Validar()
         {
             var erros = ValidarBase();

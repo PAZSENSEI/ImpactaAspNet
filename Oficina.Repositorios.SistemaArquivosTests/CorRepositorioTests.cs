@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Oficina.Repositorios;
+using Oficina.Repositorios.SistemaArquivos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

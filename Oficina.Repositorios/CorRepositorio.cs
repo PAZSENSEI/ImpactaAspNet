@@ -9,13 +9,20 @@ using System.Threading.Tasks;
 using static System.Configuration.ConfigurationManager;
 using System.Xml.Linq;
 
-namespace Oficina.Repositorios
+namespace Oficina.Repositorios.SistemaArquivos
 {
-    public class CorRepositorio
+    public class CorRepositorio : RepositorioBase
     {
-        private string caminhoArquivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                AppSettings["caminhoArquivoCor"]);
+        //ToDo: OO implementar método de extensão
+        private string caminhoArquivo;
 
+        public CorRepositorio()
+        {
+            caminhoArquivo = ObterCaminhoCompleto("caminhoArquivoCor");
+        }
+
+
+        //ToDo: OO - Polimosfismo por Sobrecarga
         public List<Cor>Selecionar()
         {
             var cores = new List<Cor>();
