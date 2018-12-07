@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViagensOnline.Repositorios.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViagensOnline.Repositorios.SqlServerTests", "ViagensOnline.Repositorios.SqlServerTests\ViagensOnline.Repositorios.SqlServerTests.csproj", "{62FDB00E-F9D0-4E67-892E-990D46235A0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViagensOnline.Mvc", "ViagensOnline.Mvc\ViagensOnline.Mvc.csproj", "{5164C9A9-7A36-48D7-B5CB-944089EF820B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,10 @@ Global
 		{62FDB00E-F9D0-4E67-892E-990D46235A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62FDB00E-F9D0-4E67-892E-990D46235A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62FDB00E-F9D0-4E67-892E-990D46235A0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5164C9A9-7A36-48D7-B5CB-944089EF820B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5164C9A9-7A36-48D7-B5CB-944089EF820B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5164C9A9-7A36-48D7-B5CB-944089EF820B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5164C9A9-7A36-48D7-B5CB-944089EF820B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,6 +119,7 @@ Global
 		{CC8BBE80-9C03-4AB6-B2E4-1F0EB3DA8543} = {B50619B6-E492-401F-84BA-146C60BF7207}
 		{7C4BF3F7-2F89-4AA8-BEE0-B958ADBA6898} = {ED01C2C7-ACF3-480C-B800-244E4C1708AE}
 		{632A9CBD-0829-4F49-8445-2BFBEC3FC0F5} = {ED01C2C7-ACF3-480C-B800-244E4C1708AE}
+		{5164C9A9-7A36-48D7-B5CB-944089EF820B} = {ED01C2C7-ACF3-480C-B800-244E4C1708AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {34C87731-9DD9-49A4-911C-AA311C3E117F}

@@ -17,7 +17,6 @@ namespace ViagensOnline.Repositorios.SqlServer.Tests
         [TestMethod()]
         public void InserirTeste()
         {
-
             var destino = new Destino();
             destino.Cidade = "São Paulo";
             destino.Nome = "Conheça São Paulo";
@@ -25,9 +24,9 @@ namespace ViagensOnline.Repositorios.SqlServer.Tests
             destino.Pais = "Brasil";
 
             db.Destinos.Add(destino);
-            
+
             db.SaveChanges();
-            
+
         }
 
         [TestMethod]
@@ -35,11 +34,24 @@ namespace ViagensOnline.Repositorios.SqlServer.Tests
         {
             var destino = db.Destinos.Find(1);
 
-            destino.Pais = "Brazil"
+            destino.Pais = "Brazil";
 
-                db.SaveChanges();
+            db.SaveChanges();
 
-            Assert.AreEqual(destino.Pais, "Brazil")
+            destino = db.Destinos.Find(1);
+
+            Assert.AreEqual(destino.Pais, "Brazil");
+        }
+
+        [TestMethod]
+        public void ExcluirTeste()
+        {
+
+            var destino = db.Destinos.Find(1);
+
+            db.Destinos.Remove(destino);
+
+            db.SaveChanges();
 
         }
 
